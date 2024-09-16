@@ -61,7 +61,9 @@ mod tests {
         fn send(&self, message: &str) {
             // we cannot do a push here because `self` is a immutable borrow as declared in `send` signature
             // self.sent_messages.push(String::from(message));
-            self.sent_messages_rc.borrow_mut().push(String::from(message));
+            self.sent_messages_rc
+                .borrow_mut()
+                .push(String::from(message));
         }
     }
 

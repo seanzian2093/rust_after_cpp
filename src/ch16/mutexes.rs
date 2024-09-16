@@ -30,42 +30,41 @@ use std::thread;
 
 #[derive(Debug)]
 #[allow(unused)]
-pub struct Mutexes{
-}
+pub struct Mutexes {}
 
 #[allow(unused)]
-impl Mutexes{
+impl Mutexes {
     pub fn print(&self) {
         println!("\n======The note on mutex======");
-    // Create a mutex
+        // Create a mutex
         let m = Mutex::new(5);
         {
-        // - use `.lock()` method to ask for lock, 
+            // - use `.lock()` method to ask for lock,
             // - would fail if another thread holding the lock panicked
-            // - in such case no one would ever be able to get the lock so use `unwrap` to have this thread panic 
+            // - in such case no one would ever be able to get the lock so use `unwrap` to have this thread panic
             // - return value is of `LockResult` type, after `unwrap` to a `MutexGuard`
-            // - `MutexGuard` is a smart pointer which 
-                // - implement `Deref` trait so we can use `*` operator to get the pointee
-                // - a `Drop` trait that release the lock automatically when a `MutexGuard` goes out of scope
+            // - `MutexGuard` is a smart pointer which
+            // - implement `Deref` trait so we can use `*` operator to get the pointee
+            // - a `Drop` trait that release the lock automatically when a `MutexGuard` goes out of scope
             let mut num = m.lock().unwrap();
-        // - after successfully acqurired the lock,treat the return value, `num` in this case, as mutable reference to the data inside
+            // - after successfully acqurired the lock,treat the return value, `num` in this case, as mutable reference to the data inside
             *num = 6;
         }
-    
+
         println!("m = {:?}", m);
 
-    // Sharing Mutex<T> Between Multiple Threads
+        // Sharing Mutex<T> Between Multiple Threads
         // - a `Mutex` obj that multiple threads will access and mutate
-            // - a pure `Mutex` obj will be moved to closure so future use is not available
+        // - a pure `Mutex` obj will be moved to closure so future use is not available
         // let counter = Mutex::new(0);
-            // - a `Rc` over `Mutex` obj will enable multiple ownerships so future use would be available
-                // - but Rust complains about unsafety with sending a `Rc` obj between threads
-                // - because `Rc` does not implement `Send` trait
+        // - a `Rc` over `Mutex` obj will enable multiple ownerships so future use would be available
+        // - but Rust complains about unsafety with sending a `Rc` obj between threads
+        // - because `Rc` does not implement `Send` trait
         // let counter = Rc::new(Mutex::new(0));
-            // - finally a `Arc<T>` is a type like `Rc<T>` that is safe to use in concurrent situations.
-                // - a for atomic, see details in `std::sync::atomic`
-                // - with performance penalty
-            // - `Arc<T>` is still not safe for concurent situations if its data contains reference
+        // - finally a `Arc<T>` is a type like `Rc<T>` that is safe to use in concurrent situations.
+        // - a for atomic, see details in `std::sync::atomic`
+        // - with performance penalty
+        // - `Arc<T>` is still not safe for concurent situations if its data contains reference
 
         let counter = Arc::new(Mutex::new(0));
         let mut handles = vec![];
@@ -86,17 +85,16 @@ impl Mutexes{
 
         // - if `count` is simply a `Mutex` obj, below code will not compile because it was moved to the closure in `thread::spawn`
         println!("Result: {}", *counter.lock().unwrap());
-    
-    // Quiz
+
+        // Quiz
         // - `Arc<T>` is still not safe for concurent situations if its data contains reference
         // - so below code will not compile
 
-    // let s = String::from("Hello world");
-    // let a = Arc::new(&s);
-    // let a2 = Arc::clone(&a);
-    // let t = thread::spawn(move || a2.len());
-    // let len = t.join().unwrap();
-    // println!("{} {}", a, len);
-    
+        // let s = String::from("Hello world");
+        // let a = Arc::new(&s);
+        // let a2 = Arc::clone(&a);
+        // let t = thread::spawn(move || a2.len());
+        // let len = t.join().unwrap();
+        // println!("{} {}", a, len);
     }
 }

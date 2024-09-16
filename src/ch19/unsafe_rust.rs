@@ -5,10 +5,10 @@
 //!         * Access or modify a mutable static variable
 //!         * Implement an unsafe trait
 //!         * Access fields of `union`s
-//!     * Two types of Raw Point 
+//!     * Two types of Raw Point
 //!         * `*const T`, i.e., immutable, i.e., cannot be directly assigned to after being dereferenced
 //!         * `*mut T`, i.e., mutable
-//! 
+//!
 //!         * `*` is not the dereference operator but part of the type name
 //!         * Power of raw pointer
 //!             * are allowed to ignore the borrowing rule by having both immutable and mutable pointers or multiple mutable pointers to the same location
@@ -29,19 +29,17 @@ unsafe impl Foo for i32 {
     // method implementations go here
 }
 
-
 #[derive(Debug)]
 #[allow(unused)]
-pub struct UnsafeRust{
-}
+pub struct UnsafeRust {}
 
 #[allow(unused)]
-impl UnsafeRust{
+impl UnsafeRust {
     pub fn print(&self) {
         println!("\n======The note on unsafe Rust======");
-    // Raw pointer from ref
+        // Raw pointer from ref
         // - create in safe code
-        let mut num =5;
+        let mut num = 5;
         let r1 = &num as *const i32;
         let r2 = &mut num as *mut i32;
         // - we must dereference a raw pointer in a `unsafe` block
@@ -50,29 +48,29 @@ impl UnsafeRust{
             println!("r2 is {}", *r2);
         }
 
-    // Calling an Unsafe Function or Method
+        // Calling an Unsafe Function or Method
         unsafe fn dangerous() {}
         unsafe {
             dangerous();
         }
 
-    // Using `extern` Functions to Call External Code
+        // Using `extern` Functions to Call External Code
         // - import `abs` from `C`
         extern "C" {
             fn abs(input: i32) -> i32;
         }
-    
+
         // - functions imported from other languanges are always unsafe
         unsafe {
             println!("Absolute value of -3 according to C: {}", abs(-3));
         }
 
-    // Accessing or Modifying a Mutable Static Variable
+        // Accessing or Modifying a Mutable Static Variable
         // - `HELLO_WORLD` is an immutable static variable
         println!("name is: {}", HELLO_WORLD);
 
         // - `COUNTER` is a mutable static variable
-            // - modify it in unsafe code
+        // - modify it in unsafe code
         fn add_to_count(inc: u32) {
             unsafe {
                 COUNTER += inc;

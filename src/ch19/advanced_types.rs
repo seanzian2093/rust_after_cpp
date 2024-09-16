@@ -13,29 +13,28 @@
 //!             * e.g., `str` is a DST
 //!         * to work with DST, Rust provides the `Sized` trait to determine whether or not a type's size is known at compile time
 //!             * automatically implemented for everything whose size is known at compile time
-//! 
+//!
 #[derive(Debug)]
 #[allow(unused)]
-pub struct AdvancedTypes{
-}
+pub struct AdvancedTypes {}
 
 #[allow(unused)]
-impl AdvancedTypes{
+impl AdvancedTypes {
     pub fn print(&self) {
         println!("\n======The note on advanced types======");
-    // Creating Type Synonyms with Type Aliases
+        // Creating Type Synonyms with Type Aliases
         type Kilometers = i32;
         let x: i32 = 5;
         let y: Kilometers = 5;
         println!("\nx + y = {}", x + y);
-            // - to reduce repeatition of long code
+        // - to reduce repeatition of long code
         type Thunk = Box<dyn Fn() + Send + 'static>;
         let f: Thunk = Box::new(|| println!("hi"));
 
         // fn takes_long_type(f: Thunk) {}
         // fn returns_long_type() -> Thunk {}
 
-    // Never type
+        // Never type
         // - bar is a function that never returns
 
         // fn bar() -> ! {
@@ -43,31 +42,29 @@ impl AdvancedTypes{
         // }
 
         // - `continue` expression has the type `!`
-            // - so below match expression is guaranteed to return `u32` because match requires all arms return same type
+        // - so below match expression is guaranteed to return `u32` because match requires all arms return same type
 
         // let guess: u32 = match guess.trim().parse() {
         //     Ok(num) => num,
         //     Err(_) => continue,
         // };
 
-    // Dynamicall Sized Types
-        // - size of `str` can not be known at compile time so does compiler complain 
+        // Dynamicall Sized Types
+        // - size of `str` can not be known at compile time so does compiler complain
 
         // let s1: str = "Hello there!";
         // let s2: str = "How's it going?";
 
         // - `Sized` trait is automatically implemented for those whose size is know at compile time
-            // - so a generic function defined like this
+        // - so a generic function defined like this
 
         // fn generic<T: Sized>(t: T) {
         //     // --snip--
         // }
-            // - is actually treated as though we had written this
+        // - is actually treated as though we had written this
 
         // fn generic<T: Sized>(t: T) {
         //     // --snip--
         // }
-
-
     }
 }

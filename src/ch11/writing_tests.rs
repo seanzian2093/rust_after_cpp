@@ -1,10 +1,9 @@
 /// # Ch11.1 - How to Writing Tests
 #[derive(Debug)]
-pub struct WritingTests{
-}
+pub struct WritingTests {}
 
 #[allow(dead_code, unused_variables)]
-impl WritingTests{
+impl WritingTests {
     pub fn print(&self) {
         println!("\n======The note on writing tests======");
     }
@@ -13,14 +12,14 @@ impl WritingTests{
         a + 2
     }
 
-    fn between_one_hundred(value: i32) -> i32{
+    fn between_one_hundred(value: i32) -> i32 {
         if value < 1 || value > 100 {
             panic!("Guess value must be between 1 and 100, got {}.", value);
         }
         value
     }
 
-    fn use_result(a:i32) -> Result<(), String> {
+    fn use_result(a: i32) -> Result<(), String> {
         if WritingTests::add_two(a) == 4 {
             Ok(())
         } else {
@@ -34,10 +33,10 @@ mod tests {
     // use crate::ch11::writing_tests::WritingTests;
     use super::*;
     // Define a test function
-        // - this `#[test]` tells Rust that this is a test function and will be run with `cargo test` command
+    // - this `#[test]` tells Rust that this is a test function and will be run with `cargo test` command
     #[test]
     fn exploration() {
-        assert_eq!(2+2, 4);
+        assert_eq!(2 + 2, 4);
     }
     #[test]
     #[ignore = "test"]
@@ -45,8 +44,8 @@ mod tests {
         panic!("Make this test fail");
     }
 
-    // Checking Results with the `assert!` Macro    
-        // - test a condition evaluates to `true` or not
+    // Checking Results with the `assert!` Macro
+    // - test a condition evaluates to `true` or not
     #[test]
     fn test_assert() {
         assert!(1 < 2);
@@ -80,15 +79,15 @@ mod tests {
     }
 
     // Using Result<T,E> in Tests
-        // - cannot use `#[should_panic]` annotation on tests that use `Result<T,E>`
-        // - use `?` operator to return `Err` for test function to fail
-            // - error message bound to `Err` variant will be printed out
+    // - cannot use `#[should_panic]` annotation on tests that use `Result<T,E>`
+    // - use `?` operator to return `Err` for test function to fail
+    // - error message bound to `Err` variant will be printed out
     #[test]
     fn test_result() -> Result<(), String> {
         let res = WritingTests::use_result(2)?;
         Ok(res)
     }
-        // - to assert an operation returns `Err` variant, use`assert!(value.is_err())`
+    // - to assert an operation returns `Err` variant, use`assert!(value.is_err())`
     #[test]
     fn test_is_err() {
         let res = WritingTests::use_result(4);

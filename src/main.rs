@@ -48,43 +48,43 @@ fn main() {
     // ch5_ms.print();
 
     // let ch6_de = ch6::define::DefineEnum{};
-    // ch6_de.print(); 
+    // ch6_de.print();
 
     // let ch6_mcf= ch6::match_control_flow::MatchControlFlow{};
-    // ch6_mcf.print(); 
+    // ch6_mcf.print();
 
     // let ch8_vec= ch8::vectors::Vectors{};
-    // ch8_vec.print(); 
+    // ch8_vec.print();
 
     // let ch8_str= ch8::strings::Strings{};
-    // ch8_str.print(); 
+    // ch8_str.print();
 
     // let ch8_hm= ch8::hashmaps::HashMaps{};
-    // ch8_hm.print(); 
+    // ch8_hm.print();
 
     // let ch9_pan= ch9::panics::Panics{};
-    // ch9_pan.print(); 
+    // ch9_pan.print();
 
     // let ch9_res= ch9::results::Results{};
-    // ch9_res.print(); 
+    // ch9_res.print();
 
     // let ch10_gen= ch10::generics::Generics{};
-    // ch10_gen.print(); 
+    // ch10_gen.print();
 
     // let ch10_tr= ch10::traits::Traits{};
-    // ch10_tr.print(); 
+    // ch10_tr.print();
 
     // let ch10_lt= ch10::lifetimes::Lifetimes{};
-    // ch10_lt.print(); 
+    // ch10_lt.print();
 
     // let ch11_wt = ch11::writing_tests::WritingTests{};
-    // ch11_wt.print(); 
+    // ch11_wt.print();
 
     // let ch11_ct = ch11::controlling_tests::ControllingTests{};
-    // ch11_ct.print(); 
+    // ch11_ct.print();
 
     // let ch11_ot = ch11::organizing_tests::OrganizingTests{};
-    // ch11_ot.print(); 
+    // ch11_ot.print();
 
     // let ch13_cl = ch13::closures::Closures {};
     // ch13_cl.print();
@@ -131,7 +131,6 @@ fn main() {
     // let ch19_afc = ch19::advanced_fn_closure::AdvancedFnClosure{};
     // ch19_afc.print();
 
-    let ch19_mcr = ch19::macros::Macros{};
+    let ch19_mcr = ch19::macros::Macros {};
     ch19_mcr.print();
-
 }

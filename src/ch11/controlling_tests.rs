@@ -14,23 +14,21 @@
 ///     * e.g., `cargo test expensive`
 
 #[derive(Debug)]
-pub struct ControllingTests{
-}
+pub struct ControllingTests {}
 
-impl ControllingTests{
+impl ControllingTests {
     pub fn print(&self) {
         println!("\n======The note on controlling tests======");
     }
 }
 
-
 #[cfg(test)]
 mod tests {
     #[test]
     // Add ignore attribute to ignore this test by default
-        // - unless specifically requested
+    // - unless specifically requested
     #[ignore = "test"]
     fn expensive_test() {
-        assert_eq!(2+2, 4);
+        assert_eq!(2 + 2, 4);
     }
 }

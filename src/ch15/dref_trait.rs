@@ -12,8 +12,7 @@
 //!             * not reverse
 #[derive(Debug)]
 #[allow(unused)]
-pub struct DerefTrait{
-}
+pub struct DerefTrait {}
 
 struct MyBox<T>(T);
 
@@ -45,47 +44,45 @@ impl Deref for AccessLogger {
     }
 }
 
-impl DerefTrait{
+impl DerefTrait {
     pub fn print(&self) {
         println!("\n======The note on Deref trait======");
-    // Following the Pointer to the Value
+        // Following the Pointer to the Value
         let x = 5;
         // - y is a regular ref to x
         let y = &x;
         // - y2 is a smart pointer, points to a copy of x, stored in heap
         let y2 = Box::new(x);
-    
+
         assert_eq!(5, x);
         // - use `*` operator to get the pointee of a regular ref
         assert_eq!(5, *y);
         // - use `*` operator to get the pointee of a smart pointer
         assert_eq!(5, *y2);
 
-    // Define Our Own Smart Pointer
+        // Define Our Own Smart Pointer
         let y3 = MyBox::new(x);
         // - use `*` operator to get the pointee of MyBox
-            // - actually running `*(y.deref())` 
+        // - actually running `*(y.deref())`
         assert_eq!(5, *y3);
-    
-    // Deref coercion
+
+        // Deref coercion
         // - fn hello takes &str as argument
         fn hello(name: &str) {
             println!("Hello, {name}!");
         }
         hello("Rust");
         // - when we provide `MyBox` which implements `Deref`, Rust does following steps for us automatically
-            // - deref `MyBox` to `String` so `&MyBox` to `&String`, and `String` implements `Deref` too so
-            // - Rust deref `&String` to `&str`
-            // - Rust will do as many times as needed to get the matching type
-                // - at compile time, so no runtime penalty
+        // - deref `MyBox` to `String` so `&MyBox` to `&String`, and `String` implements `Deref` too so
+        // - Rust deref `&String` to `&str`
+        // - Rust will do as many times as needed to get the matching type
+        // - at compile time, so no runtime penalty
         let m = MyBox::new(String::from("Rust"));
         hello(&m);
         // - or we could manually do this ourselves
-            // - get the `String` which is pointee of m by *m 
-            // - get a string slice, i.e., str, by indexing, by (*m)[..]
-            // - get &str by borrowing the str with `&`
+        // - get the `String` which is pointee of m by *m
+        // - get a string slice, i.e., str, by indexing, by (*m)[..]
+        // - get &str by borrowing the str with `&`
         hello(&((*m)[..]));
-
     }
-
 }

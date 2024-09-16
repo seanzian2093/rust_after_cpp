@@ -11,8 +11,7 @@
 
 #[derive(Debug)]
 #[allow(unused)]
-pub struct DropTrait{
-}
+pub struct DropTrait {}
 
 struct CustomSmartPointer {
     data: String,
@@ -24,13 +23,12 @@ impl Drop for CustomSmartPointer {
     }
 }
 
-
 #[allow(unused)]
-impl DropTrait{
+impl DropTrait {
     pub fn print(&self) {
         println!("\n======The note on drop trait======");
 
-    // A smart pointer that implements `Drop` trait
+        // A smart pointer that implements `Drop` trait
         // - show when `Drop` is run automatically
         let c = CustomSmartPointer {
             data: String::from("stuff c"),
@@ -44,7 +42,7 @@ impl DropTrait{
             data: String::from("stuff e"),
         };
 
-    // Use `std::mem::drop` to drop an object earlier
+        // Use `std::mem::drop` to drop an object earlier
         println!("CustomSmartPointers created.");
         // - `drop` in `Drop` trait is not allowed to be called explicitly
         // c.drop();

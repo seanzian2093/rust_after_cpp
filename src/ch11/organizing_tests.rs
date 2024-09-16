@@ -23,10 +23,9 @@
 ///     * create a `mod.rs` file in `tests/common/`
 ///     * test functions in `tests/integration_test.rs` can use `common` as a module
 #[derive(Debug)]
-pub struct OrganizingTests{
-}
+pub struct OrganizingTests {}
 
-impl OrganizingTests{
+impl OrganizingTests {
     pub fn print(&self) {
         println!("\n======The note on organizing tests======");
     }
